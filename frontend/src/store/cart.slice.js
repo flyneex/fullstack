@@ -60,13 +60,12 @@ const cartSlice = createSlice({
 						product.color === action.payload.color
 				)
 				if (exist.amount === 1) {
-					// state.cart = state.cart.filter(
-					// 	product =>
-					// 		product.id !== action.payload.id ||
-					// 		product.size !== action.payload.size ||
-					// 		product.color !== action.payload.color
-					// )
-					state.cart.splice(exist, 1)
+					state.cart = state.cart.filter(
+						product =>
+							product.id !== action.payload.id ||
+							product.size !== action.payload.size ||
+							product.color !== action.payload.color
+					)
 					state.totalAmount--
 					state.totalPrice -= action.payload.price
 				} else {
