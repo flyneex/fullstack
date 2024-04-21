@@ -1,13 +1,16 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { removeFromCart } from '../../store/cart.slice'
+import { ToastContainer } from 'react-toastify'
+import { addToCart, removeFromCart } from '../../store/cart.slice'
 import Footer from '../Footer'
 import Navbar from './Navbar'
 
 const CartPage = () => {
 	const cart = useSelector(state => state.cart.cart)
+	const totalPrice = useSelector(state => state.cart.totalPrice)
 	const dispatch = useDispatch()
 	return (
 		<div>
+			<ToastContainer />
 			<Navbar />
 			<div className='max-w-[1366px] mx-auto'>
 				<h1 className='text-white'>Cart</h1>
@@ -37,7 +40,7 @@ const CartPage = () => {
 									</div>
 								</div>
 								<div className='flex items-center text-white gap-10'>
-									<div>
+									<div onClick={() => dispatch(removeFromCart(item))}>
 										<svg
 											xmlns='http://www.w3.org/2000/svg'
 											width='32'
@@ -49,8 +52,8 @@ const CartPage = () => {
 											<path d='M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8' />
 										</svg>
 									</div>
-									<div className='text-lg'>999</div>
-									<div>
+									<div className='text-lg'>{item.amount}</div>
+									<div onClick={() => dispatch(addToCart(item))}>
 										<svg
 											xmlns='http://www.w3.org/2000/svg'
 											width='32'
@@ -76,6 +79,7 @@ const CartPage = () => {
 				) : (
 					<div className='text-white'>Cart is empty</div>
 				)}
+				<div className='text-red-500'>TOTAL: ${totalPrice}</div>
 			</div>
 			<Footer />
 		</div>

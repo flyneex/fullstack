@@ -68,6 +68,7 @@ const cartSlice = createSlice({
 					)
 					state.totalAmount--
 					state.totalPrice -= action.payload.price
+					localStorage.setItem('addedProduct', JSON.stringify(state.cart))
 				} else {
 					exist.amount--
 					exist.totalPrice -= action.payload.price
@@ -77,6 +78,10 @@ const cartSlice = createSlice({
 			} catch (err) {
 				return err
 			}
+			toast.error(`${action.payload.name} removed to cart`, {
+				position: 'top-left',
+				theme: 'dark',
+			})
 		},
 	},
 })
