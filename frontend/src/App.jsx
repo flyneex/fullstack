@@ -1,3 +1,4 @@
+import 'react-toastify/dist/ReactToastify.css'
 import './App.css'
 import Accordion from './UI/Accordion'
 import Form from './UI/Form'
@@ -21,6 +22,7 @@ const App = () => {
 
 	return (
 		<div className='app relative overflow-hidden'>
+			{/* <ToastContainer /> */}
 			<div className='cosmos'>
 				<Header />
 				<section className='billboard'>

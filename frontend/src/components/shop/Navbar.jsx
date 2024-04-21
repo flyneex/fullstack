@@ -13,16 +13,19 @@ const Navbar = () => {
 	const dispatch = useDispatch()
 
 	return (
-		<>
-			<div className='wrapper flex justify-between items-center py-5'>
+		<div className='bg-gradient-to-r from-[#155799] to-[#159957]'>
+			<div className='max-w-[1366px] flex justify-between items-center py-5 mx-auto mb-20'>
 				<div>
 					<Link to='/' className='flex justify-between items-center'>
 						<img src={Lightning} alt='LogoShop' style={{ width: '45px' }} />
 						<div className='text-white font-bold text-2xl'>ReactShop</div>
 					</Link>
 				</div>
-				<div>
-					<Link className='text-white' to='/shop'>
+				<div className='flex gap-10'>
+					<Link className='text-white text-xl font-bold' to='/'>
+						Home
+					</Link>
+					<Link className='text-white text-xl font-bold' to='/shop'>
 						Shop
 					</Link>
 				</div>
@@ -72,7 +75,7 @@ const Navbar = () => {
 					)}
 				</div>
 			</div>
-		</>
+		</div>
 	)
 }
 

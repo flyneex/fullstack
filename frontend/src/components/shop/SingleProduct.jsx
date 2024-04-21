@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { ToastContainer } from 'react-toastify'
 import Button from '../../UI/Button'
 import { addToCart } from '../../store/cart.slice'
 import Footer from '../Footer'
@@ -27,6 +28,7 @@ const SingleProduct = () => {
 
 	return (
 		<div>
+			<ToastContainer />
 			<Navbar />
 			<div className='wrapper'>
 				{getProduct.map(product => {
@@ -35,8 +37,8 @@ const SingleProduct = () => {
 							className='flex justify-between items-center accent-slate-400'
 							key={product.id}
 						>
-							<div className='w-[600px]'>
-								<img src={product.img} alt='' />
+							<div className='w-[600px] '>
+								<img className='rounded-2xl' src={product.img} alt='' />
 							</div>
 							<div>
 								<h1 className='text-white'>{product.name}</h1>
@@ -99,8 +101,9 @@ const SingleProduct = () => {
 												color: color,
 												size: size,
 												price: product.price,
-												amount: 1,
 												totalPrice: product.price,
+												desc: product.desc,
+												amount: 1,
 											})
 										)
 									}

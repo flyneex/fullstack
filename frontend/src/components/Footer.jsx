@@ -7,8 +7,8 @@ import Whatsapp from '/images/whatsapp.svg'
 const Footer = () => {
 	const fy = new Date().getFullYear()
 	return (
-		<footer className='crystal-clear'>
-			<div className='wrapper flex justify-between items-center text-white py-7'>
+		<footer className='bg-gradient-to-r from-[#155799] to-[#159957]'>
+			<div className='max-w-[1366px] mx-auto flex justify-between items-center text-white py-7 mt-20'>
 				<div className='flex items-center gap-3'>
 					&copy; {fy} all rights protected
 				</div>

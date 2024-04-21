@@ -15,11 +15,11 @@ export const fetchProducts = createAsyncThunk(
 const productSlice = createSlice({
 	name: 'product',
 	initialState: {
-		items: [],
-		filteredCategory:
-			JSON.parse(sessionStorage.getItem('filteredData')) || products,
-		singleProduct:
-			JSON.parse(sessionStorage.getItem('productItem')) || products,
+		// items: [],
+		filteredCategory: localStorage.getItem('filteredData')
+			? JSON.parse(localStorage.getItem('filteredData'))
+			: [],
+		singleProduct: JSON.parse(localStorage.getItem('productItem')),
 		error: false,
 		status: null,
 	},
@@ -33,7 +33,7 @@ const productSlice = createSlice({
 				state.error = false
 				console.log('filterCat', filterCat)
 				const filteredItem = JSON.stringify(filterCat)
-				sessionStorage.setItem('filteredData', filteredItem)
+				localStorage.setItem('filteredData', filteredItem)
 			} catch (err) {
 				return err
 			}
@@ -43,7 +43,7 @@ const productSlice = createSlice({
 				const productItem = products.filter(item => item.id === action.payload)
 				state.singleProduct = productItem
 				const productSave = JSON.stringify(productItem)
-				sessionStorage.setItem('productItem', productSave)
+				localStorage.setItem('productItem', productSave)
 			} catch (err) {
 				return err
 			}
@@ -60,7 +60,7 @@ const productSlice = createSlice({
 				if (oneGender) {
 					state.error = false
 					const saveGender = JSON.stringify(genderItem)
-					sessionStorage.setItem('filteredData', saveGender)
+					localStorage.setItem('filteredData', saveGender)
 				} else {
 					state.error = true
 					state.filteredCategory = []
@@ -81,7 +81,7 @@ const productSlice = createSlice({
 					state.error = noError
 					if (!noError) {
 						state.filteredCategory = priceItem
-						sessionStorage.setItem('filteredData', JSON.stringify(priceItem))
+						localStorage.setItem('filteredData', JSON.stringify(priceItem))
 					}
 				} else {
 					state.error = true
@@ -97,7 +97,7 @@ const productSlice = createSlice({
 					c.color.includes(action.payload)
 				)
 				state.filteredCategory = colorItem
-				sessionStorage.setItem('filteredData', JSON.stringify(colorItem))
+				localStorage.setItem('filteredData', JSON.stringify(colorItem))
 			} catch (err) {
 				return err
 			}
@@ -108,7 +108,7 @@ const productSlice = createSlice({
 					s => s.size === action.payload
 				)
 				state.filteredCategory = sizeItem
-				sessionStorage.setItem('filteredData', JSON.stringify(sizeItem))
+				localStorage.setItem('filteredData', JSON.stringify(sizeItem))
 			} catch (err) {
 				return err
 			}

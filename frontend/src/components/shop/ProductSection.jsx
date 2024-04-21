@@ -20,6 +20,7 @@ const ProductSection = () => {
 							color={product.color}
 							price={product.price}
 							size={product.size}
+							desc={product.desc}
 						/>
 					</div>
 				))}
