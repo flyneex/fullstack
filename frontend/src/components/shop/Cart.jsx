@@ -9,7 +9,7 @@ const Cart = () => {
 	const totalPrice = useSelector(state => state.cart.totalPrice)
 	const dispatch = useDispatch()
 	return (
-		<div className='p-5 bg-white rounded absolute right-16 top-16 w-[500px] overflow-auto z-11'>
+		<div className='p-5 bg-white rounded absolute right-16 top-16 w-[500px] overflow-auto z-[99]'>
 			{cart.length > 0 ? (
 				<div>
 					{cart.map((item, idx) => (
@@ -54,7 +54,7 @@ const Cart = () => {
 				<div>Your cart is empty</div>
 			)}
 			<div className='text-center mt-10'>
-				<Link to='/cartpage'>
+				<Link to='/checkout'>
 					<Button text='Make a order' variant='dark' />
 				</Link>
 			</div>
