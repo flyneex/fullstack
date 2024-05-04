@@ -4,6 +4,9 @@ import { Provider } from 'react-redux'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import App from './App.jsx'
 import Dashboard from './components/admin/Dashboard.jsx'
+import Products from './components/admin/Products.jsx'
+import Summary from './components/admin/Summary.jsx'
+import Users from './components/admin/Users.jsx'
 import CartPage from './components/shop/CartPage.jsx'
 import FilteredPage from './components/shop/FilteredPage.jsx'
 import Login from './components/shop/Login.jsx'
@@ -64,9 +67,19 @@ const router = createBrowserRouter([
 		element: <Register />,
 	},
 	{
-		path: 'admin',
+		path: '/admin',
 		element: <Dashboard />,
-		children: [],
+		children: [
+			{
+				path: 'summary',
+				element: <Summary />,
+			},
+			{
+				path: 'users',
+				element: <Users />,
+			},
+			{ path: 'products', element: <Products /> },
+		],
 	},
 ])
 

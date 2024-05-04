@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 import Navbar from '../shop/Navbar'
 
 const Dashboard = () => {
@@ -6,18 +6,35 @@ const Dashboard = () => {
 		<>
 			<Navbar />
 			<div className='flex'>
-				<div className='sidebar'>
+				<div className='sidebar basis-[20%]'>
 					<div>
-						<Link to='users'>Users</Link>
+						<Link
+							className={({ isActive }) => (isActive ? 'active' : '')}
+							to='users'
+						>
+							Users
+						</Link>
 					</div>
 					<div>
-						<Link to='products'>Products</Link>
+						<Link
+							className={({ isActive }) => (isActive ? 'active' : '')}
+							to='products'
+						>
+							Products
+						</Link>
 					</div>
 					<div>
-						<Link to='summary'>Summary</Link>
+						<Link
+							className={({ isActive }) => (isActive ? 'active' : '')}
+							to='summary'
+						>
+							Summary
+						</Link>
 					</div>
 				</div>
-				<div className='content'>Dashboard</div>
+				<div className='content basis-[80%]'>
+					<Outlet />
+				</div>
 			</div>
 		</>
 	)
