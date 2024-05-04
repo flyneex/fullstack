@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import Button from '../../UI/Button.jsx'
-import { loginUser } from '../../store/auth.slice.js'
+import { registerUser } from '../../store/auth.slice.js'
 import Navbar from './Navbar.jsx'
 
-const Login = () => {
+const Register = () => {
 	const auth = useSelector(state => state.auth)
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 	console.log('auth', auth)
 	const [user, setUser] = useState({
+		name: '',
 		email: '',
 		password: '',
 	})
 	console.log('user', user)
-	const dispatchLogin = e => {
+	const dispatchRegister = e => {
 		e.preventDefault()
-		dispatch(loginUser(user))
-		toast.info('You are logged in')
+		dispatch(registerUser(user))
 	}
 	useEffect(() => {
 		if (auth._id) {
@@ -31,8 +31,14 @@ const Login = () => {
 		<>
 			<Navbar />
 			<div className='flex flex-col justify-center items-center h-screen'>
-				<h3 className='mb-12 text-white'>Login</h3>
-				<form onSubmit={dispatchLogin} className='flex flex-col'>
+				<h3 className='mb-12 text-white'>Registration</h3>
+				<form onSubmit={dispatchRegister} className='flex flex-col'>
+					<input
+						className='input-field'
+						type='text'
+						placeholder='Name'
+						onChange={e => setUser({ ...user, name: e.target.value })}
+					/>
 					<input
 						className='input-field'
 						type='email'
@@ -46,16 +52,21 @@ const Login = () => {
 						onChange={e => setUser({ ...user, password: e.target.value })}
 					/>
 					<Button
-						text={auth.loginStatus === 'pending' ? 'Logging...' : 'Login'}
+						text={
+							auth.registerStatus === 'pending' ? 'Submitting...' : 'Register'
+						}
 						variant='light'
 					/>
-					{auth.loginStatus === 'rejected'
+					{auth.registerStatus === 'rejected'
 						? toast.error('Invalid login or password')
 						: null}
+					<div className='text-white font-bold text-2xl'>
+						Register already? <Link to={'/login'}>Login</Link>
+					</div>
 				</form>
 			</div>
 		</>
 	)
 }
 
-export default Login
+export default Register

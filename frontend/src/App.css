@@ -337,3 +337,7 @@ section:nth-child(2n + 1):not(.billboard) {
 	border-style: dotted;
 	border-top-color: #004e92;
 }
+
+.input-field {
+	@apply mb-5 p-5 rounded-lg w-[500px];
+}

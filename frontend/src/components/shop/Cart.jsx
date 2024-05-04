@@ -9,7 +9,7 @@ const Cart = () => {
 	const totalPrice = useSelector(state => state.cart.totalPrice)
 	const dispatch = useDispatch()
 	return (
-		<div className='p-5 bg-white rounded absolute right-16 top-16 w-[500px] overflow-auto'>
+		<div className='p-5 bg-white rounded absolute right-16 top-16 w-[500px] overflow-auto z-11'>
 			{cart.length > 0 ? (
 				<div>
 					{cart.map((item, idx) => (

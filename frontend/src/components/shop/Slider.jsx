@@ -18,7 +18,11 @@ const Slider = () => {
 					key={idx}
 				>
 					{slide.id === slideIndex && (
-						<img src={slide.img} alt='Slider1' className='w-full h-[500px]' />
+						<img
+							src={slide.img}
+							alt='Slider1'
+							className='w-full h-[500px] rounded-lg'
+						/>
 					)}
 					{slide.id === slideIndex && slide.text && (
 						<div className='absolute bottom-10 left-1/2 translate-x-[-50%] w-full'>

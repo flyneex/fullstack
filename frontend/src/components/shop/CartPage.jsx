@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { ToastContainer } from 'react-toastify'
-import { addToCart, removeFromCart } from '../../store/cart.slice'
+import Button from '../../UI/Button'
+import { addToCart, clearCart, removeFromCart } from '../../store/cart.slice'
 import Footer from '../Footer'
 import Navbar from './Navbar'
 
@@ -80,6 +81,9 @@ const CartPage = () => {
 					<div className='text-white'>Cart is empty</div>
 				)}
 				<div className='text-red-500'>TOTAL: ${totalPrice}</div>
+				<div onClick={() => dispatch(clearCart())}>
+					<Button text='Clear cart' variant='light' />
+				</div>
 			</div>
 			<Footer />
 		</div>

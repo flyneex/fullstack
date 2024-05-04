@@ -1,20 +1,26 @@
 const express = require('express')
 const app = express()
-const products = require('./products')
-const cors = require('cors')
 
+const cors = require('cors')
+const mongoose = require('mongoose')
+const register = require('./routes/register')
+const login = require('./routes/login')
 // const prisma = new PrismaClient()
+const products = require('./products')
 
 app.use(express.json())
-// app.use(cors())
-
-app.get('/api', async (req, res) => {
+app.use(cors())
+app.use('/api/register', register)
+app.use('/api/login', login)
+app.get('/', async (req, res) => {
 	res.send('Hello world')
 })
 
 app.get('/api/products', async (req, res) => {
 	res.send(products)
 })
+
+require('dotenv').config()
 
 // app.post('/api', async (req, res) => {
 // 	const { name, email } = req.body
@@ -36,5 +42,13 @@ app.get('/api/products', async (req, res) => {
 // 		res.status(400).send({ message: error })
 // 	}
 // })
+
 const port = process.env.port || 8080
+const db = process.env.MongoDB_url
+
 app.listen(port)
+
+mongoose
+	.connect(db)
+	.then(() => console.log('MongoDB was connected...'))
+	.catch(err => console.log(err.message))

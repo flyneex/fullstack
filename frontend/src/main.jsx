@@ -6,6 +6,7 @@ import App from './App.jsx'
 import CartPage from './components/shop/CartPage.jsx'
 import FilteredPage from './components/shop/FilteredPage.jsx'
 import Login from './components/shop/Login.jsx'
+import Register from './components/shop/Register.jsx'
 import SingleProduct from './components/shop/SingleProduct.jsx'
 import { UserProvider } from './context/UserContext.jsx'
 import './index.css'
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
 	{
 		path: 'cartpage',
 		element: <CartPage />,
+	},
+	{
+		path: 'register',
+		element: <Register />,
 	},
 ])
 

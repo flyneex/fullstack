@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import authSlice from './auth.slice'
+import authSlice, { loadUser } from './auth.slice'
 import cartSlice from './cart.slice'
 import counterSlice from './counter.slice'
 import productSlice, { fetchProducts } from './product.slice'
@@ -22,5 +22,6 @@ const store = configureStore({
 })
 
 store.dispatch(fetchProducts())
+store.dispatch(loadUser(null))
 
 export default store
