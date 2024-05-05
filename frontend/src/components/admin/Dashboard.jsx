@@ -1,4 +1,4 @@
-import { Link, Outlet } from 'react-router-dom'
+import { NavLink, Outlet } from 'react-router-dom'
 import Navbar from '../shop/Navbar'
 
 const Dashboard = () => {
@@ -8,28 +8,34 @@ const Dashboard = () => {
 			<div className='flex'>
 				<div className='sidebar basis-[20%]'>
 					<div>
-						<Link
-							className={({ isActive }) => (isActive ? 'active' : '')}
+						<NavLink
+							className={({ isActive }) =>
+								isActive ? 'text-red-700' : 'text-white'
+							}
 							to='users'
 						>
 							Users
-						</Link>
+						</NavLink>
 					</div>
 					<div>
-						<Link
-							className={({ isActive }) => (isActive ? 'active' : '')}
+						<NavLink
+							className={({ isActive }) =>
+								isActive ? 'text-red-700' : 'text-white'
+							}
 							to='products'
 						>
 							Products
-						</Link>
+						</NavLink>
 					</div>
 					<div>
-						<Link
-							className={({ isActive }) => (isActive ? 'active' : '')}
+						<NavLink
+							className={({ isActive }) =>
+								isActive ? 'text-red-700' : 'text-white'
+							}
 							to='summary'
 						>
 							Summary
-						</Link>
+						</NavLink>
 					</div>
 				</div>
 				<div className='content basis-[80%]'>
