@@ -123,7 +123,7 @@ h5 {
 }
 
 .cosmos {
-	background-image: url('../public/images/1674779416.png');
+	background-image: url('/images/1674779416.png');
 	/* mix-blend-mode: color;	 */
 	background-position: center center;
 	background-size: cover;

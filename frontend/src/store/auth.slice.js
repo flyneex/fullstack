@@ -49,6 +49,7 @@ const authSlice = createSlice({
 		loginStatus: '',
 		loginError: '',
 		userLoaded: false,
+		isAdmin: '',
 	},
 	reducers: {
 		loadUser: state => {
@@ -63,6 +64,7 @@ const authSlice = createSlice({
 					name: user.name,
 					email: user.email,
 					_id: user._id,
+					isAdmin: user.isAdmin,
 					userLoaded: true,
 				}
 			}
@@ -98,6 +100,7 @@ const authSlice = createSlice({
 						name: user.name,
 						email: user.email,
 						_id: user._id,
+						isAdmin: user.isAdmin,
 						registerStatus: 'success',
 					}
 				} else {
@@ -123,6 +126,7 @@ const authSlice = createSlice({
 						name: user.name,
 						email: user.email,
 						_id: user._id,
+						isAdmin: user.isAdmin,
 						loginStatus: 'success',
 					}
 				} else {

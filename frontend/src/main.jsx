@@ -1,3 +1,4 @@
+import { NextUIProvider } from '@nextui-org/react'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux'
@@ -5,6 +6,8 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import App from './App.jsx'
 import Create from './components/admin/Create.jsx'
 import Dashboard from './components/admin/Dashboard.jsx'
+import Orders from './components/admin/Orders.jsx'
+import ProductList from './components/admin/ProductList.jsx'
 import Products from './components/admin/Products.jsx'
 import Summary from './components/admin/Summary.jsx'
 import Users from './components/admin/Users.jsx'
@@ -32,15 +35,15 @@ const router = createBrowserRouter([
 		element: <App />,
 	},
 	{
-		path: 'page',
+		path: '/page',
 		element: <Page />,
 	},
 	{
-		path: 'project/:slug',
+		path: '/project/:slug',
 		element: <Project />,
 	},
 	{
-		path: 'blog',
+		path: '/blog',
 		element: <Blog />,
 	},
 	{
@@ -52,19 +55,19 @@ const router = createBrowserRouter([
 		element: <FilteredPage />,
 	},
 	{
-		path: 'shop',
+		path: '/shop',
 		element: <Shop />,
 	},
 	{
-		path: 'login',
+		path: '/login',
 		element: <Login />,
 	},
 	{
-		path: 'checkout',
+		path: '/checkout',
 		element: <CartPage />,
 	},
 	{
-		path: 'register',
+		path: '/register',
 		element: <Register />,
 	},
 	{
@@ -80,9 +83,16 @@ const router = createBrowserRouter([
 				element: <Users />,
 			},
 			{
+				path: 'orders',
+				element: <Orders />,
+			},
+			{
 				path: 'products',
 				element: <Products />,
-				children: [{ path: 'create', element: <Create /> }],
+				children: [
+					{ path: 'create', element: <Create /> },
+					{ index: 1, element: <ProductList /> },
+				],
 			},
 		],
 	},
@@ -92,9 +102,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 	<React.StrictMode>
 		<Provider store={store}>
 			<UserProvider>
-				<RouterProvider router={router}>
-					<App />
-				</RouterProvider>
+				<NextUIProvider>
+					<RouterProvider router={router}>
+						<App />
+					</RouterProvider>
+				</NextUIProvider>
 			</UserProvider>
 		</Provider>
 	</React.StrictMode>

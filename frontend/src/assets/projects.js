@@ -1,4 +1,4 @@
-import WTF from '/images/77-770672.png'
+import Wtf from '/images/admin.png'
 import Music from '/images/music-snap.png'
 import Todo from '/images/todo-snap.png'
 
@@ -21,17 +21,31 @@ export default [
 	},
 	{
 		id: 3,
-		title: 'Miracle Shop',
+		title: 'React Shop',
 		desc: 'In development',
-		img: WTF,
+		img: Wtf,
 		slug: 'miracle',
 		url: '#',
 	},
-	// {
-	// 	id: 4,
-	// 	title: 'Coming soon',
-	// 	desc: 'Lorem ipsum',
-	// 	img: '/images/77-770672.png',
-	// 	slug: 'coming-soon',
-	// },
+	{
+		id: 4,
+		title: 'Coming soon',
+		desc: 'Lorem ipsum',
+		img: '/images/77-770672.png',
+		slug: 'coming-soon',
+	},
+	{
+		id: 5,
+		title: 'Coming soon',
+		desc: 'Lorem ipsum',
+		img: '/images/77-770672.png',
+		slug: 'coming-soon',
+	},
+	{
+		id: 6,
+		title: 'Coming soon',
+		desc: 'Lorem ipsum',
+		img: '/images/77-770672.png',
+		slug: 'coming-soon',
+	},
 ]

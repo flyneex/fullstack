@@ -1,31 +1,42 @@
-import products from '../../assets/products'
-import { useGetAllProductsQuery } from '../../store/productApi'
-import FilterCategory from './FilterCategory'
-import ProductCard from './ProductCard'
+import { useSelector } from 'react-redux'
 
 const ProductSection = () => {
-	const { data, error, isLoading } = useGetAllProductsQuery()
+	// const { data, error, isLoading } = useGetAllProductsQuery()
+	const { items: data, status } = useSelector(state => state.product)
+	console.log('products array', data)
 
 	return (
 		<div className='wrapper'>
-			<FilterCategory />
-			<div className='flex justify-between items-center flex-wrap gap-5'>
-				{products.map((product, idx) => (
-					<div key={idx}>
-						<ProductCard
-							id={product.id}
-							category={product.category}
-							img={product.img}
-							name={product.name}
-							color={product.color}
-							price={product.price}
-							size={product.size}
-							desc={product.desc}
-						/>
-					</div>
-				))}
-			</div>
-			{isLoading ? (
+			{/* <FilterCategory /> */}
+			{status === 'success' ? (
+				<div className='flex justify-between items-center flex-wrap gap-5'>
+					{data &&
+						data?.map((product, idx) => (
+							<div key={idx}>
+								<div>
+									<img className='w-[300px]' src={product.img.url} alt='' />
+								</div>
+								<div className='text-white text-2xl'>{product.name}</div>
+								<div className='text-white text-2xl'>{product.brand}</div>
+								<div className='text-white text-2xl'>{product.desc}</div>
+								<div className='text-white text-2xl'>${product.price}</div>
+								{/* <ProductCard
+									id={product._id}
+									// category={product.category}
+									img={product.img}
+									name={product.name}
+									// color={product.color}
+									price={product.price}
+									// size={product.size}
+									desc={product.desc}
+								/> */}
+							</div>
+						))}
+				</div>
+			) : (
+				<div>No products.</div>
+			)}
+			{/* {isLoading ? (
 				<div>Loading...</div>
 			) : error ? (
 				<div>Error</div>
@@ -38,7 +49,7 @@ const ProductSection = () => {
 						</div>
 					))}
 				</div>
-			)}
+			)} */}
 		</div>
 	)
 }

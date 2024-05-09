@@ -20,6 +20,10 @@ const userSchema = new mongoose.Schema({
 		minLength: 3,
 		maxLength: 250,
 	},
+	isAdmin: {
+		type: Boolean,
+		default: false,
+	},
 })
 
 const User = new mongoose.model('user', userSchema)

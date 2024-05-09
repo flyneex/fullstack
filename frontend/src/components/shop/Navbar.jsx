@@ -78,9 +78,11 @@ const Navbar = () => {
 						<div>
 							{auth._id ? (
 								<div className='flex gap-5'>
-									<Link to='/admin' className='text-white'>
-										Admin
-									</Link>
+									{auth.isAdmin ? (
+										<Link to='/admin' className='text-white'>
+											Admin
+										</Link>
+									) : null}
 									<Link className='text-white' onClick={logoutHandler}>
 										Logout
 									</Link>

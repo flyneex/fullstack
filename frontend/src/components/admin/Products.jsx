@@ -6,7 +6,7 @@ const Products = () => {
 	const navigate = useNavigate()
 	return (
 		<>
-			<div onClick={() => navigate('/admin/products/create')}>
+			<div className='mb-8' onClick={() => navigate('/admin/products/create')}>
 				<Button text='Create Product' variant='light' />
 			</div>
 			<Outlet />

@@ -1,19 +1,22 @@
 const express = require('express')
 const app = express()
+const bodyParser = require('body-parser')
 
 const cors = require('cors')
 const mongoose = require('mongoose')
 const register = require('./routes/register')
 const login = require('./routes/login')
 // const prisma = new PrismaClient()
-const products = require('./products')
-const productsV2 = require('./routes/products')
+// const products = require('./products')
+const products = require('./routes/products')
 
+app.use(bodyParser.json({ limit: '50mb' }))
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }))
 app.use(express.json())
 app.use(cors())
 app.use('/api/register', register)
 app.use('/api/login', login)
-app.use('/api/products', productsV2)
+app.use('/api/products', products)
 
 app.get('/', async (req, res) => {
 	res.send('Hello world')
