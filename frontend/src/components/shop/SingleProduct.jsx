@@ -1,50 +1,77 @@
-import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { useParams } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import Button from '../../UI/Button'
 import { addToCart } from '../../store/cart.slice'
+import { setHeaders } from '../../store/product.slice'
 import Footer from '../Footer'
 import Navbar from './Navbar'
 
 const SingleProduct = () => {
-	const getProduct = useSelector(state => state.product.singleProduct)
-	const [size, setSize] = useState(getProduct[0].size[0])
-	const [color, setColor] = useState(getProduct[0].color[0])
-	const selectedColor = clr => {
-		setColor(clr === color ? null : clr)
-	}
+	// const { items: getProduct } = useSelector(state => state.product)
+	// const [size, setSize] = useState(getProduct[0].size[0])
+	// const [color, setColor] = useState(getProduct[0].color[0])
+	// const selectedColor = clr => {
+	// 	setColor(clr === color ? null : clr)
+	// }
+	const [product, setProduct] = useState('')
+	const [loading, setLoading] = useState(false)
 
+	const params = useParams()
 	const dispatch = useDispatch()
-	console.log(size)
-	console.log(color)
-	console.log('getProduct1', getProduct)
 
-	const totalAmount = useSelector(state => state.cart.totalAmount)
-	const totalPrice = useSelector(state => state.cart.totalPrice)
-	const getCart = useSelector(state => state.cart.cart)
-	console.log(getCart)
-	console.log(totalAmount)
-	console.log(totalPrice)
+	// console.log(size)
+	// console.log(color)
+	// console.log('getProduct', getProduct)
+
+	// const totalAmount = useSelector(state => state.cart.totalAmount)
+	// const totalPrice = useSelector(state => state.cart.totalPrice)
+	// const getCart = useSelector(state => state.cart.cart)
+	// console.log('getCart', getCart)
+	// console.log('totalAmount', totalAmount)
+	// console.log('totalPrice', totalPrice)
+
+	useEffect(() => {
+		setLoading(true)
+		async function fetchData() {
+			try {
+				const res = await axios.get(
+					`http://localhost:8080/api/products/${params.id}`,
+					setHeaders()
+				)
+				console.log('res', res)
+				setProduct(res.data)
+			} catch (err) {
+				console.log(err)
+			}
+			setLoading(false)
+		}
+		fetchData()
+	}, [])
 
 	return (
 		<div>
 			<ToastContainer />
 			<Navbar />
 			<div className='wrapper'>
-				{getProduct.map(product => {
-					return (
-						<div
-							className='flex justify-between items-center accent-slate-400'
-							key={product.id}
-						>
-							<div className='w-[600px] '>
-								<img className='rounded-2xl' src={product.img} alt='' />
-							</div>
-							<div>
-								<h1 className='text-white'>{product.name}</h1>
-								<div className='text-white'>{product.category}</div>
-								<div className='text-white'>{product.desc}</div>
-								<div>
+				{loading ? (
+					<div>Loading...</div>
+				) : (
+					<div
+						className='flex justify-between items-center accent-slate-400'
+						key={product.id}
+					>
+						<div className='w-[600px] '>
+							<img className='rounded-2xl' src={product.img?.url} alt='' />
+						</div>
+						<div>
+							<h1 className='text-white'>{product.name}</h1>
+							{/* <div className='text-white'>{product.category}</div> */}
+							<div className='text-white'>{product.desc}</div>
+							<div className='text-white'>{product.brand}</div>
+							{/* <div>
 									{product.size && (
 										<>
 											<label className='text-white' htmlFor='size'>
@@ -65,8 +92,8 @@ const SingleProduct = () => {
 											</select>
 										</>
 									)}
-								</div>
-								<div className='flex gap-1'>
+								</div> */}
+							{/* <div className='flex gap-1'>
 									{product.color && (
 										<>
 											<span className='text-white'>Pick a color</span>
@@ -86,34 +113,36 @@ const SingleProduct = () => {
 											})}
 										</>
 									)}
-								</div>
-								<div className='text-white'>{product.gender}</div>
-								<div className='text-white text-2xl font-bold'>
-									${product.price}
-								</div>
-								<div
-									onClick={() =>
-										dispatch(
-											addToCart({
-												id: product.id,
-												name: product.name,
-												img: product.img,
-												color: color,
-												size: size,
-												price: product.price,
-												totalPrice: product.price,
-												desc: product.desc,
-												amount: 1,
-											})
-										)
-									}
-								>
-									<Button variant='light' text='Add to cart' />
-								</div>
+								</div> */}
+							{/* <div className='text-white'>{product.gender}</div> */}
+							<div className='text-white text-2xl font-bold'>
+								{new Intl.NumberFormat('en-US', {
+									style: 'currency',
+									currency: 'USD',
+								}).format(product.price)}
+							</div>
+							<div
+								onClick={() =>
+									dispatch(
+										addToCart({
+											id: product._id,
+											name: product.name,
+											img: product.img?.url,
+											// color: color,
+											// size: size,
+											price: product.price,
+											totalPrice: product.price,
+											desc: product.desc,
+											amount: 1,
+										})
+									)
+								}
+							>
+								<Button variant='light' text='Add to cart' />
 							</div>
 						</div>
-					)
-				})}
+					</div>
+				)}
 			</div>
 			<Footer />
 		</div>

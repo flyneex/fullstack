@@ -1,8 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
+import { toast } from 'react-toastify'
 // import products from '../assets/products'
 
-const setHeaders = () => {
+export const setHeaders = () => {
 	const headers = {
 		headers: {
 			'x-auth-token': localStorage.getItem('token'),
@@ -43,6 +44,41 @@ export const uploadProducts = createAsyncThunk(
 	}
 )
 
+export const updateProducts = createAsyncThunk(
+	'product/updateProducts',
+	async values => {
+		try {
+			const response = await axios.put(
+				`http://localhost:8080/api/products/${values.product._id}`,
+				values,
+				setHeaders()
+			)
+			// const data = await response?.json()
+			// return data
+			return response.data
+		} catch (err) {
+			console.log('uploadProducts', err)
+		}
+	}
+)
+
+export const deleteProducts = createAsyncThunk(
+	'product/deleteProducts',
+	async id => {
+		try {
+			const response = await axios.delete(
+				`http://localhost:8080/api/products/${id}`,
+				setHeaders()
+			)
+			// const data = await response?.json()
+			// return data
+			return response.data
+		} catch (err) {
+			console.log('deleteProducts', err)
+		}
+	}
+)
+
 const productSlice = createSlice({
 	name: 'product',
 	initialState: {
@@ -50,10 +86,12 @@ const productSlice = createSlice({
 		// filteredCategory: localStorage.getItem('filteredData')
 		// 	? JSON.parse(localStorage.getItem('filteredData'))
 		// 	: [],
-		singleProduct: JSON.parse(localStorage.getItem('productItem')),
+		// singleProduct: JSON.parse(localStorage.getItem('productItem')),
 		error: false,
 		status: null,
 		createStatus: null,
+		updateStatus: null,
+		deleteStatus: null,
 	},
 	reducers: {
 		// filteredCategory: (state, action) => {
@@ -72,7 +110,10 @@ const productSlice = createSlice({
 		// },
 		// singleProduct: (state, action) => {
 		// 	try {
-		// 		const productItem = products.filter(item => item.id === action.payload)
+		// 		const productItem = state.items.filter(
+		// 			item => item.id === action.payload
+		// 		)
+		// 		console.log('productItem', state.items)
 		// 		state.singleProduct = productItem
 		// 		const productSave = JSON.stringify(productItem)
 		// 		localStorage.setItem('productItem', productSave)
@@ -170,6 +211,35 @@ const productSlice = createSlice({
 			})
 			.addCase(uploadProducts.rejected, (state, action) => {
 				state.createStatus = 'rejected'
+				// state.error = action.error.message
+			})
+			.addCase(updateProducts.pending, (state, action) => {
+				state.updateStatus = 'pending'
+				// state.products = action.payload
+			})
+			.addCase(updateProducts.fulfilled, (state, action) => {
+				const update = state.items.map(item =>
+					item._id === action.payload._id ? action.payload : item
+				)
+				state.items = update
+				state.updateStatus = 'success'
+				toast('Product updated')
+			})
+			.addCase(updateProducts.rejected, (state, action) => {
+				state.updateStatus = 'rejected'
+				// state.error = action.error.message
+			})
+			.addCase(deleteProducts.pending, (state, action) => {
+				state.deleteStatus = 'pending'
+				// state.products = action.payload
+			})
+			.addCase(deleteProducts.fulfilled, (state, action) => {
+				const list = state.items.filter(item => item._id !== action.payload._id)
+				state.items = list
+				state.deleteStatus = 'success'
+			})
+			.addCase(deleteProducts.rejected, (state, action) => {
+				state.deleteStatus = 'rejected'
 				// state.error = action.error.message
 			})
 	},

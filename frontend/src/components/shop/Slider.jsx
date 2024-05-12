@@ -12,7 +12,7 @@ const Slider = () => {
 				<div
 					className={
 						slide.id === slideIndex
-							? 'opacity-100 w-full duration-300 relative bg-gradient-to-b from-[#2f3f7b00] to-[#1f2e69]'
+							? 'opacity-100 w-full duration-300 relative bg-gradient-to-b from-[#2f3f7b00] to-[#1f2e69] mb-16'
 							: 'opacity-0'
 					}
 					key={idx}

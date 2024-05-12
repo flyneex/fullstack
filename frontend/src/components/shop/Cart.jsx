@@ -25,14 +25,14 @@ const Cart = () => {
 								<div>
 									<div>{item.name}</div>
 									<div>Amount: {item.amount}</div>
-									<div>Size: {item.size}</div>
+									{/* <div>Size: {item.size}</div>
 									<div className='flex items-center gap-2'>
 										Color:
 										<div
 											className='w-[15px] h-[15px] rounded-full border'
 											style={{ backgroundColor: item.color }}
 										></div>
-									</div>
+									</div> */}
 									<div className='flex justify-between gap-10'>
 										<div>Price: {item.price}</div>
 										<div>Total Price: {item.totalPrice}</div>

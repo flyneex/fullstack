@@ -61,12 +61,16 @@ router.delete('/:id', isAdmin, async (req, res) => {
 		if (!product) return res.status(404).send('Product not found')
 
 		if (product.img.public_id) {
-			const deletedImg = cloudinary.uploader.destroy(product.img.public_id)
+			const deletedImg = await cloudinary.uploader.destroy(
+				product.img.public_id
+			)
+			if (deletedImg) {
+				const deleted = await Product.findByIdAndDelete(req.params.id)
+				res.status(200).send(deleted)
+			}
+		} else {
+			console.log('failed deleting')
 		}
-		if (deletedImg) {
-			const deleted = await Product.findByIdAndDelete(req.params.id)
-		}
-		res.status(200).send(deleted)
 	} catch (err) {
 		res.status(500).send(err)
 	}
@@ -76,10 +80,31 @@ router.delete('/:id', isAdmin, async (req, res) => {
 
 router.put('/:id', isAdmin, async (req, res) => {
 	try {
-		const product = await Product.findById(req.params.id)
-		// to do
+		let uploadImg
+		if (req.body.img) {
+			const deletedImg = await cloudinary.uploader.destroy(
+				req.body.product.img.public_id
+			)
+			if (deletedImg) {
+				uploadImg = await cloudinary.uploader.upload(req.body.img, {
+					upload_preset: 'online-shop',
+				})
+			}
+		}
+
+		const updated = await Product.findByIdAndUpdate(
+			req.params.id,
+			{
+				$set: {
+					...req.body.product,
+					img: uploadImg || req.body.product.img,
+				},
+			},
+			{ new: true }
+		)
+		res.status(200).send(updated)
 	} catch (err) {
-		res.status(500).send(err)
+		res.status(500).send(err.message)
 	}
 })
 
