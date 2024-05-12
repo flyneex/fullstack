@@ -60,17 +60,19 @@ const SingleProduct = () => {
 					<div>Loading...</div>
 				) : (
 					<div
-						className='flex justify-between items-center accent-slate-400'
+						className='flex justify-between items-start accent-slate-400'
 						key={product.id}
 					>
 						<div className='w-[600px] '>
 							<img className='rounded-2xl' src={product.img?.url} alt='' />
 						</div>
-						<div>
-							<h1 className='text-white'>{product.name}</h1>
+						<div className='w-[600px]'>
+							<h1 className='text-white font-black mb-8'>{product.name}</h1>
 							{/* <div className='text-white'>{product.category}</div> */}
-							<div className='text-white'>{product.desc}</div>
-							<div className='text-white'>{product.brand}</div>
+							<div className='text-white mb-7'>{product.desc}</div>
+							<div className='text-white mb-6 bg-slate-400 border rounded-full py-1 px-2 w-max'>
+								{product.brand}
+							</div>
 							{/* <div>
 									{product.size && (
 										<>
@@ -115,13 +117,14 @@ const SingleProduct = () => {
 									)}
 								</div> */}
 							{/* <div className='text-white'>{product.gender}</div> */}
-							<div className='text-white text-2xl font-bold'>
+							<div className='text-white text-2xl font-bold mb-5'>
 								{new Intl.NumberFormat('en-US', {
 									style: 'currency',
 									currency: 'USD',
 								}).format(product.price)}
 							</div>
 							<div
+								className='mb-16'
 								onClick={() =>
 									dispatch(
 										addToCart({
@@ -140,6 +143,7 @@ const SingleProduct = () => {
 							>
 								<Button variant='light' text='Add to cart' />
 							</div>
+							general specifications:
 						</div>
 					</div>
 				)}

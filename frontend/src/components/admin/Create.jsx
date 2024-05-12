@@ -105,7 +105,7 @@ const Create = () => {
 										/>
 										<input
 											className='mb-5 p-5 rounded-sm'
-											type='text'
+											type='number'
 											onChange={e => setPrice(e.target.value)}
 											placeholder='Price'
 										/>

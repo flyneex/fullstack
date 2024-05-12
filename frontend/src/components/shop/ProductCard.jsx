@@ -1,12 +1,11 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { singleProduct } from '../../store/product.slice'
 
 const ProductCard = ({ id, img, desc, name, color, price, size, category }) => {
 	const dispatch = useDispatch()
 	return (
-		<div onClick={() => dispatch(singleProduct(id))}>
+		<div className='w-1/4'>
 			<div>
 				<Link to={`/product/${id}`}>
 					<img

@@ -10,7 +10,7 @@ const ProductSection = () => {
 		<div className='wrapper'>
 			{/* <FilterCategory /> */}
 			{status === 'success' ? (
-				<div className='flex justify-between items-center flex-wrap gap-5'>
+				<div className='flex justify-start items-center flex-wrap gap-5'>
 					{data &&
 						data?.map((product, idx) => (
 							<ProductCard

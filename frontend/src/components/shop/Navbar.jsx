@@ -22,11 +22,11 @@ const Navbar = () => {
 		<>
 			<ToastContainer />
 			<div className='bg-gradient-to-r from-[#155799] to-[#159957]'>
-				<div className='max-w-[1366px] flex justify-between items-center py-5 mx-auto mb-20'>
+				<div className='max-w-[1366px] flex justify-between items-center py-10 mx-auto mb-20'>
 					<div>
-						<Link to='/' className='flex justify-between items-center'>
+						<Link to='/' className='flex justify-between items-center gap-5'>
 							<img src={Lightning} alt='LogoShop' style={{ width: '45px' }} />
-							<div className='text-white font-bold text-2xl'>ReactShop</div>
+							<div className='text-white font-bold text-3xl'>ReactShop</div>
 						</Link>
 					</div>
 					<div className='flex gap-10'>

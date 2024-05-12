@@ -158,10 +158,10 @@ const ProductList = () => {
 		})
 
 	const columns = [
-		{
-			key: 'id',
-			label: 'ID',
-		},
+		// {
+		// 	key: 'id',
+		// 	label: 'ID',
+		// },
 		{
 			key: 'imageUrl',
 			label: 'Image',
